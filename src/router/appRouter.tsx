@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLayout } from "@/layout";
-import { DashboardView } from "@/views";
+import { CreateProjectView, DashboardView } from "@/views";
 
 export function AppRoutes() {
     return (
@@ -8,6 +8,7 @@ export function AppRoutes() {
             <Routes>
                 <Route element={<AppLayout />}>
                     <Route path="/" element={<DashboardView />} index />
+                    <Route path="/projects/create" element={<CreateProjectView />}/>
                 </Route>
             </Routes>
         </BrowserRouter>
