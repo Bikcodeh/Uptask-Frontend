@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AppLayout } from "../layout";
-import { DashboardView } from "../views";
+import { AppLayout } from "@/layout";
+import { DashboardView } from "@/views";
 
-export default function AppRoutes() {
+export function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
