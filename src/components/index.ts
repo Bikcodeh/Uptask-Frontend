@@ -2,6 +2,7 @@ export * from './Logo';
 export * from './NavMenu';
 export * from './ErrorMessage';
 export * from './projects/ProjectForm';
+export * from './projects/EditProjectForm';
 export * from './Loading';
 export * from './projects/ProjectItem';
 export * from './projects/ProjectOptions';

@@ -417,6 +417,18 @@
   resolved "https://npm.artifacts.furycloud.io/repository/all/@tanstack/query-core/-/query-core-5.28.6.tgz#a3bdb108f9f8d4e2ba3163068dbe6ff55b905a81"
   integrity sha512-hnhotV+DnQtvtR3jPvbQMPNMW4KEK0J4k7c609zJ8muiNknm+yoDyMHmxTWM5ZnlZpsz0zOxYFr+mzRJNHWJsA==
 
+"@tanstack/query-devtools@5.28.6":
+  version "5.28.6"
+  resolved "https://npm.artifacts.furycloud.io/repository/all/@tanstack/query-devtools/-/query-devtools-5.28.6.tgz#da31268b79102e6fd8d6df64763ec9c02d84bd58"
+  integrity sha512-DXJGqbrsteWU9XehDf6s3k3QxwQqGUlNXpitsF1xbwkYBcDaAakiC6hjJSMfPBHOrbZCnWfAGCVf4vh2D75/xw==
+
+"@tanstack/react-query-devtools@^5.28.8":
+  version "5.28.8"
+  resolved "https://npm.artifacts.furycloud.io/repository/all/@tanstack/react-query-devtools/-/react-query-devtools-5.28.8.tgz#d9299198144de6f1b9feb04a27eaebd4a14db638"
+  integrity sha512-NorR2ueGlGdB5PTvt1WynzjfNI/OJwiisB1r0UAwgi0Em2UalZpMltwvoIrGhJ0T2V+8b0MV5wD+cmf0PPdHGA==
+  dependencies:
+    "@tanstack/query-devtools" "5.28.6"
+
 "@tanstack/react-query@^5.28.6":
   version "5.28.6"
   resolved "https://npm.artifacts.furycloud.io/repository/all/@tanstack/react-query/-/react-query-5.28.6.tgz#0d52b0a98a1d842debf9c65496e20a9981a23bc4"
