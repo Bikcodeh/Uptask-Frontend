@@ -39,7 +39,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
         <div className="flex min-w-0 gap-x-4">
           <div className="min-w-0 flex-auto space-y-2">
             <Link
-              to={`/projects/${project.projectId}/edit`}
+              to={`/projects/${project.projectId}`}
               className="text-gray-600 cursor-pointer hover:underline text-3xl font-bold"
             >
               {project.projectName}

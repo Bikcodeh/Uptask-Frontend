@@ -26,17 +26,17 @@ export function NavMenu() {
                         <Link
                             to='/profile'
                             className='block p-2 hover:text-purple-950'
-                        >Mi Perfil</Link>
+                        >Profile</Link>
                         <Link
                             to='/'
                             className='block p-2 hover:text-purple-950'
-                        >Mis Proyectos</Link>
+                        >My Projects</Link>
                         <button
                             className='block p-2 hover:text-purple-950'
                             type='button'
                             onClick={() => { }}
                         >
-                            Cerrar Sesión
+                            Logout
                         </button>
                     </div>
                 </Popover.Panel>
