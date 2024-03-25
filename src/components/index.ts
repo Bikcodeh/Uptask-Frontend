@@ -8,3 +8,4 @@ export * from './projects/ProjectItem';
 export * from './projects/ProjectOptions';
 export * from './projects/ProjectList';
 export * from './AlertMessage';
+export * from './tasks/AddTaskModal';
