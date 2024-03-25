@@ -3,7 +3,12 @@ import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
-export const OptionsMenu = () => (
+type OptionsMenuProps = {
+    projectId: string;
+    onDelete: () => void;
+}
+
+export const OptionsMenu = ({ projectId, onDelete }: OptionsMenuProps) => (
     <Menu as="div" className="relative flex-none">
         <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
             <span className="sr-only">Options</span>
@@ -25,7 +30,7 @@ export const OptionsMenu = () => (
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to={``} className="block px-3 py-1 text-sm leading-6 text-gray-900">
+                    <Link to={`/projects/${projectId}/edit`} className="block px-3 py-1 text-sm leading-6 text-gray-900">
                         Edit Project
                     </Link>
                 </Menu.Item>
@@ -33,7 +38,7 @@ export const OptionsMenu = () => (
                     <button
                         type="button"
                         className="block px-3 py-1 text-sm leading-6 text-red-500"
-                        onClick={() => { }}
+                        onClick={() => onDelete()}
                     >
                         Delete Project
                     </button>

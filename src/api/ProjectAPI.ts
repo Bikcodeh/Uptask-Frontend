@@ -58,3 +58,16 @@ export async function updateProject({ id, formData }: UpdateProjectData) {
         }
     }
 }
+
+export async function deleteProjectById(id: string) {
+    try {
+        const { data } = await uptaskApi.delete<ApiResponse<null>>(`/projects/${id}`);
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error((error.response.data as ApiResponse<Project>).msg);
+        } else {
+            throw new Error('An unexpected error happened, please try again later')
+        }
+    }
+}
