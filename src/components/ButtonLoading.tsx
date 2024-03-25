@@ -14,7 +14,7 @@ export const ButtonLoading: React.FC<ButtonLoadingProps> = ({ title, isLoading =
             </div>
             <input
                 disabled={isLoading}
-                className={`${fullWidth ? 'w-full': ''} ${isLoading ? 'bg-gray-300 cursor-not-allowed' : 'bg-fuchsia-600 hover:bg-fuchsia-700 cursor-pointer'}  w-full p-3 text-white uppercase font-bold transition-colors rounded-md`}
+                className={`${fullWidth ? 'w-full': ''} ${isLoading ? 'bg-gray-300 cursor-not-allowed' : 'bg-purple-400 hover:bg-purple-500 cursor-pointer'}  w-full p-3 text-white uppercase font-bold transition-colors rounded-md`}
                 type="submit"
                 value={`${isLoading ? '' : title}`}
             />

@@ -1,45 +1,17 @@
-
 import { ApiResponse, Project, ProjectFormData } from "@/types";
 import { uptaskApi } from "@/lib";
-import { isAxiosError } from "axios";
+import { makeSafeRequest } from "@/utils";
 
 export async function createProject(formData: ProjectFormData) {
-    try {
-        const { data } = await uptaskApi.post<ApiResponse<Project>>('/projects', formData);
-        return data;
-    } catch (error) {
-        if (isAxiosError(error) && error.response) {
-            throw new Error((error.response.data as ApiResponse<Project>).msg);
-        } else {
-            throw new Error('An unexpected error happened, please try again later')
-        }
-    }
+    return await makeSafeRequest(() => uptaskApi.post<ApiResponse<Project>>('/projects', formData));
 }
 
 export async function getProjects() {
-    try {
-        const { data } = await uptaskApi<ApiResponse<Project[]>>('/projects');
-        return data;
-    } catch (error) {
-        if (isAxiosError(error) && error.response) {
-            throw new Error((error.response.data as ApiResponse<Project>).msg);
-        } else {
-            throw new Error('An unexpected error happened, please try again later')
-        }
-    }
+    return await makeSafeRequest(() => uptaskApi<ApiResponse<Project[]>>('/projects'));
 }
 
 export async function getProjectById(id: string) {
-    try {
-        const { data } = await uptaskApi<ApiResponse<Project>>(`/projects/${id}`);
-        return data;
-    } catch (error) {
-        if (isAxiosError(error) && error.response) {
-            throw new Error((error.response.data as ApiResponse<Project>).msg);
-        } else {
-            throw new Error('An unexpected error happened, please try again later')
-        }
-    }
+    return await makeSafeRequest(() => uptaskApi<ApiResponse<Project>>(`/projects/${id}`));
 }
 
 type UpdateProjectData = {
@@ -47,27 +19,9 @@ type UpdateProjectData = {
     formData: ProjectFormData;
 }
 export async function updateProject({ id, formData }: UpdateProjectData) {
-    try {
-        const { data } = await uptaskApi.put<ApiResponse<Project>>(`/projects/${id}`, formData);
-        return data;
-    } catch (error) {
-        if (isAxiosError(error) && error.response) {
-            throw new Error((error.response.data as ApiResponse<Project>).msg);
-        } else {
-            throw new Error('An unexpected error happened, please try again later')
-        }
-    }
+    return await makeSafeRequest(() => uptaskApi.put<ApiResponse<Project>>(`/projects/${id}`, formData));
 }
 
 export async function deleteProjectById(id: string) {
-    try {
-        const { data } = await uptaskApi.delete<ApiResponse<null>>(`/projects/${id}`);
-        return data;
-    } catch (error) {
-        if (isAxiosError(error) && error.response) {
-            throw new Error((error.response.data as ApiResponse<Project>).msg);
-        } else {
-            throw new Error('An unexpected error happened, please try again later')
-        }
-    }
+    return await makeSafeRequest(() => uptaskApi.delete<ApiResponse<null>>(`/projects/${id}`));
 }
