@@ -1,7 +1,7 @@
 import { ApiResponse } from "@/types";
 import { isAxiosError, AxiosResponse } from "axios";
 
-export const makeSafeRequest = async <T>(exec: () => Promise<AxiosResponse<T>>): Promise<T> => {
+export const makeSafeRequest = async <T>(exec: () => Promise<AxiosResponse<ApiResponse<T>>>): Promise<ApiResponse<T>> => {
     try {
         const response = await exec();
         return response.data;

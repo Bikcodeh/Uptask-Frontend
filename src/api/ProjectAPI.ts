@@ -1,17 +1,17 @@
-import { ApiResponse, Project, ProjectFormData } from "@/types";
+import { Project, ProjectFormData } from "@/types";
 import { uptaskApi } from "@/lib";
 import { makeSafeRequest } from "@/utils";
 
 export async function createProject(formData: ProjectFormData) {
-    return await makeSafeRequest(() => uptaskApi.post<ApiResponse<Project>>('/projects', formData));
+    return await makeSafeRequest<Project>(() => uptaskApi.post('/projects', formData));
 }
 
 export async function getProjects() {
-    return await makeSafeRequest(() => uptaskApi<ApiResponse<Project[]>>('/projects'));
+    return await makeSafeRequest<Project[]>(() => uptaskApi('/projects'));
 }
 
 export async function getProjectById(id: string) {
-    return await makeSafeRequest(() => uptaskApi<ApiResponse<Project>>(`/projects/${id}`));
+    return await makeSafeRequest<Project>(() => uptaskApi(`/projects/${id}`));
 }
 
 type UpdateProjectData = {
@@ -19,9 +19,9 @@ type UpdateProjectData = {
     formData: ProjectFormData;
 }
 export async function updateProject({ id, formData }: UpdateProjectData) {
-    return await makeSafeRequest(() => uptaskApi.put<ApiResponse<Project>>(`/projects/${id}`, formData));
+    return await makeSafeRequest<Project>(() => uptaskApi.put(`/projects/${id}`, formData));
 }
 
 export async function deleteProjectById(id: string) {
-    return await makeSafeRequest(() => uptaskApi.delete<ApiResponse<null>>(`/projects/${id}`));
+    return await makeSafeRequest<null>(() => uptaskApi.delete(`/projects/${id}`));
 }

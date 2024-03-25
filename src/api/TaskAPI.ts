@@ -1,5 +1,5 @@
 import { uptaskApi } from '@/lib';
-import { ApiResponse, Task, TaskFormData } from "@/types";
+import { Task, TaskFormData } from "@/types";
 import { makeSafeRequest } from '@/utils';
 
 type TaskAPI = {
@@ -8,5 +8,5 @@ type TaskAPI = {
 }
 
 export const createTask = async ({ projectId, formData }: TaskAPI) => {
-    return makeSafeRequest(() => uptaskApi.post<ApiResponse<Task>>(`/projects/${projectId}/tasks`, formData));
+    return makeSafeRequest<Task>(() => uptaskApi.post(`/projects/${projectId}/tasks`, formData));
 }
