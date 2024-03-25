@@ -3,3 +3,7 @@ export * from './NavMenu';
 export * from './ErrorMessage';
 export * from './projects/ProjectForm';
 export * from './Loading';
+export * from './projects/ProjectItem';
+export * from './projects/ProjectOptions';
+export * from './projects/ProjectList';
+export * from './AlertMessage';

@@ -15,3 +15,16 @@ export async function createProject(formData: ProjectFormData) {
         }
     }
 }
+
+export async function getProjects() {
+    try {
+        const { data } = await uptaskApi<ApiResponse<Project[]>>('/projects');
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error((error.response.data as ApiResponse<Project>).msg);
+        } else {
+            throw new Error('An unexpected error happened, please try again later')
+        }
+    }
+}
