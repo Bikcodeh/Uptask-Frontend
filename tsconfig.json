@@ -11,6 +11,9 @@
       "@/views": ["views"],
       "@/layout": ["layout"],
       "@/router": ["router"],
+      "@/api": ["api"],
+      "@/lib": ["lib"],
+      "@/types": ["types"]
     },
 
     /* Bundler mode */

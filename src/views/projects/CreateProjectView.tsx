@@ -1,7 +1,10 @@
-import { ProjectForm } from "@/components"
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
-import { ProjectFormData } from "types"
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom"
+import { Loading, ProjectForm } from "@/components"
+import { ProjectFormData } from "@/types"
+import { createProject } from "@/api";
 
 const initialValues: ProjectFormData = {
     projectName: "",
@@ -11,12 +14,22 @@ const initialValues: ProjectFormData = {
 
 export const CreateProjectView = () => {
 
+    const navigate = useNavigate();
+
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
-    const onSubmit = (data: ProjectFormData) => {
+    const { mutate, isPending } = useMutation({
+        mutationFn: createProject,
+        onError: (error) => {
+            toast.error(error.message)
+        },
+        onSuccess: (data) => {
+            navigate('/')
+            toast.success(data?.msg)
+        }
+    })
 
-    }
-
+    const onSubmit = async (formData: ProjectFormData) => mutate(formData);
     return (
         <>
             <h1 className="text-5xl font-black">Create Project</h1>
@@ -31,14 +44,18 @@ export const CreateProjectView = () => {
                     onSubmit={handleSubmit(onSubmit)}
                     noValidate
                 >
-
-                    <ProjectForm register={register} errors={errors} />
-                    <input
-                        className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded-md"
-                        type="submit"
-                        value="Create Project"
-                    />
-
+                    <ProjectForm disabledFields={isPending} register={register} errors={errors} />
+                    <div className="flex justify-center items-center">
+                        <div className={`${isPending ? 'visible absolute' : 'hidden'}`}>
+                            <Loading />
+                        </div>
+                        <input
+                            disabled={isPending}
+                            className={`${isPending ? 'bg-gray-500 cursor-not-allowed' : 'bg-fuchsia-600 hover:bg-fuchsia-700 cursor-pointer'}  w-full p-3 text-white uppercase font-bold transition-colors rounded-md`}
+                            type="submit"
+                            value={`${isPending ? '' : 'Create Project'}`}
+                        />
+                    </div>
                 </form>
             </div>
         </>

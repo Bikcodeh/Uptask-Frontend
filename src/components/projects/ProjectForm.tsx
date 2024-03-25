@@ -4,10 +4,11 @@ import { ProjectFormData } from "types";
 
 type ProjectFormProps = {
     register: UseFormRegister<ProjectFormData>,
-    errors: FieldErrors<ProjectFormData>
+    errors: FieldErrors<ProjectFormData>,
+    disabledFields: boolean;
 }
 
-export const ProjectForm: React.FC<ProjectFormProps> = ({ register, errors }) => {
+export const ProjectForm: React.FC<ProjectFormProps> = ({ register, errors, disabledFields = false }) => {
     return (
         <>
             <div className="mb-5 space-y-3">
@@ -15,6 +16,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ register, errors }) =>
                     Project Name
                 </label>
                 <input
+                    disabled={disabledFields}
                     id="projectName"
                     className="w-full p-3  border border-gray-200"
                     type="text"
@@ -34,6 +36,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ register, errors }) =>
                     Client Name
                 </label>
                 <input
+                    disabled={disabledFields}
                     id="clientName"
                     className="w-full p-3  border border-gray-200"
                     type="text"
@@ -53,6 +56,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ register, errors }) =>
                     Description
                 </label>
                 <textarea
+                    disabled={disabledFields}
                     id="description"
                     className="w-full p-3  border border-gray-200"
                     placeholder="Project Description"
