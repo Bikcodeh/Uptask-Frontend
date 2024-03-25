@@ -21,6 +21,7 @@ export const CreateProjectView = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: createProject,
         onError: (error) => {
+            console.log(error)
             toast.error(error.message)
         },
         onSuccess: (data) => {
@@ -29,7 +30,7 @@ export const CreateProjectView = () => {
         }
     })
 
-    const onSubmit = async (formData: ProjectFormData) => mutate(formData);
+    const onSubmit = async (formData: ProjectFormData) => mutate({ formData });
     return (
         <>
             <h1 className="text-5xl font-black">Create Project</h1>

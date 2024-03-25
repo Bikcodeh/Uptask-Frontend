@@ -49,7 +49,7 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
           </div>
         </div>
         <div className="flex shrink-0 items-center gap-x-6">
-          <OptionsMenu projectId={project.projectId} onDelete={() => mutate(project.projectId)} />
+          <OptionsMenu projectId={project.projectId} onDelete={() => mutate({ id: project.projectId })} />
         </div>
       </li>
     </div>
