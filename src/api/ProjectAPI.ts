@@ -2,7 +2,12 @@ import { Project, ProjectFormData } from "@/types";
 import { uptaskApi } from "@/lib";
 import { makeSafeRequest } from "@/utils";
 
-export async function createProject(formData: ProjectFormData) {
+type ProjectDataAPI = {
+    id: string;
+    formData: ProjectFormData;
+}
+
+export async function createProject({ formData }: ProjectDataAPI) {
     return await makeSafeRequest<Project>(() => uptaskApi.post('/projects', formData));
 }
 
@@ -10,18 +15,14 @@ export async function getProjects() {
     return await makeSafeRequest<Project[]>(() => uptaskApi('/projects'));
 }
 
-export async function getProjectById(id: string) {
+export async function getProjectById({ id }: ProjectDataAPI) {
     return await makeSafeRequest<Project>(() => uptaskApi(`/projects/${id}`));
 }
 
-type UpdateProjectData = {
-    id: string;
-    formData: ProjectFormData;
-}
-export async function updateProject({ id, formData }: UpdateProjectData) {
+export async function updateProject({ id, formData }: ProjectDataAPI) {
     return await makeSafeRequest<Project>(() => uptaskApi.put(`/projects/${id}`, formData));
 }
 
-export async function deleteProjectById(id: string) {
+export async function deleteProjectById({ id }: ProjectDataAPI) {
     return await makeSafeRequest<null>(() => uptaskApi.delete(`/projects/${id}`));
 }
