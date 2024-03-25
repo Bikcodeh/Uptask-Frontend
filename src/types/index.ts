@@ -29,6 +29,8 @@ export type Task = {
     updatedAt: string;
 }; 
 
+export type TaskFormData = Pick<Task, 'name' | 'description'>
+
 /** Task */
 
 /** ApiResponse */

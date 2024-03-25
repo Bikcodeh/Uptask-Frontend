@@ -9,3 +9,6 @@ export * from './projects/ProjectOptions';
 export * from './projects/ProjectList';
 export * from './AlertMessage';
 export * from './tasks/AddTaskModal';
+export * from './tasks/TaskForm';
+export * from './ButtonLoading';
+export * from './Button';

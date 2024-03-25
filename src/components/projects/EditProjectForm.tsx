@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
-import { Loading } from ".."
+import { ButtonLoading, Loading, Button } from ".."
 import { ProjectForm } from "./ProjectForm"
 import { Project, ProjectFormData } from "@/types"
 import { updateProject } from "@/api"
@@ -41,9 +40,7 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = ({ project, proje
         <>
             <h1 className="text-5xl font-black">Edit Project</h1>
             <nav className="my-5">
-                <Link to='/' className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-md">
-                    Back
-                </Link>
+                <Button title="Back" route="/" />
             </nav>
             <div className="max-w-3xl mx-auto">
                 <form
@@ -56,12 +53,7 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = ({ project, proje
                         <div className={`${isPending ? 'visible absolute' : 'hidden'}`}>
                             <Loading />
                         </div>
-                        <input
-                            disabled={isPending}
-                            className={`${isPending ? 'bg-gray-500 cursor-not-allowed' : 'bg-fuchsia-600 hover:bg-fuchsia-700 cursor-pointer'}  w-full p-3 text-white uppercase font-bold transition-colors rounded-md`}
-                            type="submit"
-                            value={`${isPending ? '' : 'Save Project'}`}
-                        />
+                        <ButtonLoading fullWidth={true} title="Save Project" isLoading={isPending} />
                     </div>
                 </form>
             </div>
