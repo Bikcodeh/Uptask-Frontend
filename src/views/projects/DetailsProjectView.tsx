@@ -1,4 +1,4 @@
-import { AlertMessage, Loading, AddTaskModal } from "@/components";
+import { AlertMessage, Loading, AddTaskModal, TaskList } from "@/components";
 import { useGetProject } from "@/hooks";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -22,10 +22,10 @@ export const DetailsProjectView: React.FC = () => {
 
     if (isError || !success) return <ErrorMessage message={msg} />
     if (isFetching) return <div className="flex flex-1 justify-center items-center"><Loading /></div>
-    if (data) return (
+    if (data.data) return (
         <>
-            <h1 className="text-5xl font-black">{ }</h1>
-            <p className="text-2xl font-light text-gray-500 mt-5">Manage your projects</p>
+            <h1 className="text-5xl font-black">{ project?.projectName }</h1>
+            <p className="text-2xl font-light text-gray-500 mt-5">{ project?.description }</p>
             <nav className="my-5 flex gap-3">
                 <button
                     className="uppercase bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-md"
@@ -34,7 +34,7 @@ export const DetailsProjectView: React.FC = () => {
                     Add Task
                 </button>
             </nav>
-
+            <TaskList tasks={project!.tasks} />
             <AddTaskModal />
         </>
     )

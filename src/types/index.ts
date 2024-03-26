@@ -4,6 +4,7 @@ export type Project = {
     projectName: string,
     clientName: string,
     description: string,
+    tasks: Task[];
 };
 
 export type ProjectFormData = Pick<Project, 'clientName' | 'description' | 'projectName'>

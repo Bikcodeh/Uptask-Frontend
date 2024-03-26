@@ -4,12 +4,13 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ButtonLoading, TaskForm } from '@/components';
 import { TaskFormData } from '@/types';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createTask } from '@/api';
 import { toast } from 'react-toastify';
 
 export const AddTaskModal = () => {
 
+    const queryClient = useQueryClient();
     const { projectId = '' } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,6 +32,8 @@ export const AddTaskModal = () => {
         onSuccess: (data) => {
             toast.success(data.msg)
             reset()
+            queryClient.invalidateQueries({ queryKey:['projectById']})
+            navigate(location.pathname, { replace: true })
         },
         onError: (error) => {
             toast.error(error.message)
