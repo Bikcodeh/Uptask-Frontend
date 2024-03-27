@@ -19,3 +19,7 @@ export const getTaskById = async ({ projectId, taskId }: Pick<TaskAPI, 'projectI
 export const updateTask = async ({ projectId, taskId, formData }: Pick<TaskAPI, 'projectId' | 'taskId' | 'formData'>) => {
     return makeSafeRequest<Task>(() => uptaskApi.put(`/projects/${projectId}/tasks/${taskId}`, { ...formData }));
 }
+
+export const deleteTask = async ({ projectId, taskId }: Pick<TaskAPI, 'projectId' | 'taskId'>) => {
+    return makeSafeRequest<Task>(() => uptaskApi.delete(`/projects/${projectId}/tasks/${taskId}`));
+}

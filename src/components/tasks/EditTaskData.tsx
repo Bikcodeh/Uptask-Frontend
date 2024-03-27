@@ -10,7 +10,7 @@ export const EditTaskData = () => {
   const queryParams = new URLSearchParams(location.search);
   const taskId = queryParams.get('taskId') || ''
 
-  const { data, error, isFetching } = useQuery({
+  const { data, error } = useQuery({
     queryFn: () => getTaskById({ projectId, taskId }),
     queryKey: ['taskById', taskId],
     enabled: !!taskId
