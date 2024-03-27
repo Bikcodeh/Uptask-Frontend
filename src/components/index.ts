@@ -12,5 +12,7 @@ export * from './tasks/AddTaskModal';
 export * from './tasks/TaskList';
 export * from './tasks/TaskCard';
 export * from './tasks/TaskForm';
+export * from './tasks/EditTaskData';
+export * from './tasks/EditTaskModal';
 export * from './ButtonLoading';
 export * from './Button';

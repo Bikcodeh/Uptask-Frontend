@@ -1,8 +1,18 @@
 import { Menu, Transition } from "@headlessui/react"
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid"
-import { Fragment } from "react/jsx-runtime"
+import { useNavigate } from "react-router-dom"
+import { Fragment } from "react"
+import { Task } from "@/types"
 
-export const TaskOptions = () => {
+type TaskOptionsProps = {
+    task: Task;
+}
+
+
+export const TaskOptions: React.FC<TaskOptionsProps> = ({ task }) => {
+
+    const navigate = useNavigate();
+
     return (
         <div className="flex shrink-0  gap-x-6">
             <Menu as="div" className="relative flex-none">
@@ -21,7 +31,11 @@ export const TaskOptions = () => {
                             </button>
                         </Menu.Item>
                         <Menu.Item>
-                            <button type='button' className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                            <button 
+                            type='button' 
+                            className='block px-3 py-1 text-sm leading-6 text-gray-900'
+                            onClick={() => navigate(`?taskId=${task.taskId}`)}
+                            >
                                 Edit Task
                             </button>
                         </Menu.Item>

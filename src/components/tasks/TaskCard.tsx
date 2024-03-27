@@ -15,7 +15,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           <p className="text-slate-500">{task.description}</p>
         </button>
       </div>
-      <TaskOptions />
+      <TaskOptions task={task}/>
     </li>
   )
 }
