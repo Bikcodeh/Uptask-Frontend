@@ -13,3 +13,13 @@ export const makeSafeRequest = async <T>(exec: () => Promise<AxiosResponse<ApiRe
         }
     }
 }
+
+export const formateDate = (isoString: string): string => {
+    const date = new Date(isoString);
+    const formatter = new Intl.DateTimeFormat('en-EN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    })
+    return formatter.format(date);
+}

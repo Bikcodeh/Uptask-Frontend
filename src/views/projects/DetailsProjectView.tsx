@@ -1,4 +1,4 @@
-import { AlertMessage, Loading, AddTaskModal, TaskList, EditTaskData } from "@/components";
+import { AlertMessage, Loading, AddTaskModal, TaskList, EditTaskData, TaskModalDetails } from "@/components";
 import { useGetProject } from "@/hooks";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -37,6 +37,7 @@ export const DetailsProjectView: React.FC = () => {
             <TaskList tasks={project!.tasks} />
             <AddTaskModal />
             <EditTaskData />
+            <TaskModalDetails />
         </>
     )
 }
