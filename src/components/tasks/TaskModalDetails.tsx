@@ -1,8 +1,10 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { formateDate } from '@/utils';
 import { useGetTask } from '@/hooks';
+import { updateStatusTask } from '@/api';
 import { toast } from 'react-toastify';
 import { statusTranslations } from '@/locales';
 
@@ -10,9 +12,26 @@ export const TaskModalDetails: React.FC = () => {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const { projectId } = useParams()
+    const { projectId = '' } = useParams()
+    const queryClient = useQueryClient()
     const params = new URLSearchParams(location.search)
     const taskId = params.get('viewTask') || ''
+
+    const { mutate } = useMutation({
+        mutationFn: updateStatusTask,
+        onSuccess: (data) => {
+            toast.success(data.msg)
+            queryClient.invalidateQueries({queryKey: ['projectById', projectId]})
+            queryClient.invalidateQueries({queryKey: ['taskById', taskId]})
+        },
+        onError: (error) => {
+            toast.error(error.message)
+        }
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        mutate({ projectId, taskId, status: e.target.value });
+    }
 
     if (!projectId) return (<Navigate to={'/'} />)
 
@@ -67,6 +86,7 @@ export const TaskModalDetails: React.FC = () => {
                                             name="status"
                                             id="status"
                                             defaultValue={task.status}
+                                            onChange={handleChange}
                                         >
                                             {Object.entries(statusTranslations).map(([key, value]) => (
                                                 <option key={key} value={key}>{value}</option>

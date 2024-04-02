@@ -6,6 +6,7 @@ type TaskAPI = {
     projectId: string;
     formData: TaskFormData;
     taskId: string;
+    status: string;
 }
 
 export const createTask = async ({ projectId, formData }: Pick<TaskAPI, 'projectId' | 'formData'>) => {
@@ -22,4 +23,8 @@ export const updateTask = async ({ projectId, taskId, formData }: Pick<TaskAPI, 
 
 export const deleteTask = async ({ projectId, taskId }: Pick<TaskAPI, 'projectId' | 'taskId'>) => {
     return makeSafeRequest<Task>(() => uptaskApi.delete(`/projects/${projectId}/tasks/${taskId}`));
+}
+
+export const updateStatusTask = async ({ projectId, taskId, status }: Pick<TaskAPI, 'projectId' | 'taskId' | 'status'>) => {
+    return makeSafeRequest<Task>(() => uptaskApi.post(`/projects/${projectId}/tasks/${taskId}/status`, { status }));
 }
