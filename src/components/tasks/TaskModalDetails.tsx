@@ -4,6 +4,7 @@ import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { formateDate } from '@/utils';
 import { useGetTask } from '@/hooks';
 import { toast } from 'react-toastify';
+import { statusTranslations } from '@/locales';
 
 export const TaskModalDetails: React.FC = () => {
 
@@ -61,6 +62,16 @@ export const TaskModalDetails: React.FC = () => {
                                     <p className='text-lg text-slate-500 mb-2'>Description: {task.description}</p>
                                     <div className='my-5 space-y-3'>
                                         <label className='font-bold'>Current Status:</label>
+                                        <select
+                                            className='w-full p-3 bg-white border border-gray-300'
+                                            name="status"
+                                            id="status"
+                                            defaultValue={task.status}
+                                        >
+                                            {Object.entries(statusTranslations).map(([key, value]) => (
+                                                <option key={key} value={key}>{value}</option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
