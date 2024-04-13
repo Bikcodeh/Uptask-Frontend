@@ -46,3 +46,14 @@ export type ErrorApi = {
     msg: string;
 }
 /** ApiResponse */
+
+/** Auth */
+export type Auth = {
+    name: string;
+    email: string;
+    password: string;
+    confirm_password: string;
+}
+
+export type UserLoginForm = Pick<Auth, 'email' | 'password'>
+/** Auth */
