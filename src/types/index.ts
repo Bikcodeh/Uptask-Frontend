@@ -56,4 +56,5 @@ export type Auth = {
 }
 
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
+export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'confirm_password'>
 /** Auth */

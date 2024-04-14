@@ -6,7 +6,8 @@ import {
     DashboardView, 
     EditProjectView, 
     NotFoundView,
-    LoginView
+    LoginView,
+    RegisterView
 } from "@/views";
 
 export function AppRoutes() {
@@ -22,6 +23,7 @@ export function AppRoutes() {
                 </Route>
                 <Route element={<AuthLayout />} >
                     <Route path="/auth/login" element={<LoginView />} />
+                    <Route path="/auth/register" element={<RegisterView />} />
                 </Route>
             </Routes>
         </BrowserRouter>
