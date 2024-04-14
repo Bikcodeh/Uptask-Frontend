@@ -5,3 +5,4 @@ export * from './projects/DetailsProjectView';
 export * from './NotFoundView';
 export * from './auth/LoginView';
 export * from './auth/RegisterView';
+export * from './auth/ConfirmAccountView';

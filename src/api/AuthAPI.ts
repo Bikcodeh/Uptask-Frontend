@@ -5,3 +5,7 @@ import { UserRegistrationForm } from "@/types";
 export const createAccount = async (formData: UserRegistrationForm) => {
     return await makeSafeRequest<string>(() => uptaskApi.post('/auth/create-account', formData))
 }
+
+export const confirmAccount = async (token: string) => {
+    return await makeSafeRequest<string>(() => uptaskApi.post('/auth/confirm-account', { token }))
+}
