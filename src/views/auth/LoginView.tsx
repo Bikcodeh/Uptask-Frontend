@@ -1,9 +1,22 @@
 import { useForm } from "react-hook-form";
 import { UserLoginForm } from "@/types";
-import { ErrorMessage } from "@/components";
+import { ButtonLoading, ErrorMessage } from "@/components";
 import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { doLogin } from "@/api";
+import { toast } from "react-toastify";
 
 export const LoginView: React.FC = () => {
+
+    const { mutate, isPending } = useMutation({
+        mutationFn: doLogin,
+        onSuccess: (data) => {
+            toast.success(data.msg)
+        },
+        onError: (error) => {
+            toast.error(error.message)
+        }
+    })
 
     const initialValues: UserLoginForm = {
         email: '',
@@ -11,7 +24,9 @@ export const LoginView: React.FC = () => {
     }
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
-    const handleLogin = (formData: UserLoginForm) => { }
+    const handleLogin = (formData: UserLoginForm) => {
+        mutate(formData)
+    }
 
     return (
         <>
@@ -49,6 +64,7 @@ export const LoginView: React.FC = () => {
                     >Password</label>
 
                     <input
+                        id="password"
                         type="password"
                         placeholder="Password"
                         className="w-full p-3  border-gray-300 border"
@@ -61,10 +77,9 @@ export const LoginView: React.FC = () => {
                     )}
                 </div>
 
-                <input
-                    type="submit"
-                    value='Login'
-                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer"
+                <ButtonLoading
+                    title="Login"
+                    isLoading={isPending}
                 />
             </form>
             <nav className="mt-10 flex flex-col space-y-4">

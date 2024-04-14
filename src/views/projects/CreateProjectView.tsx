@@ -21,7 +21,6 @@ export const CreateProjectView = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: createProject,
         onError: (error) => {
-            console.log(error)
             toast.error(error.message)
         },
         onSuccess: (data) => {

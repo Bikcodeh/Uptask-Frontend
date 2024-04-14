@@ -10,6 +10,7 @@ export const makeSafeRequest = async <T>(exec: () => Promise<AxiosResponse<ApiRe
         const response = await exec();
         return response.data;
     } catch (error) {
+        //TODO:// Delete this console log
         console.log(error);
         if (isAxiosError(error) && error.response) {
             if (isObject(error.response.data)) {
