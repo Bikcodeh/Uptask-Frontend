@@ -6,3 +6,4 @@ export * from './NotFoundView';
 export * from './auth/LoginView';
 export * from './auth/RegisterView';
 export * from './auth/ConfirmAccountView';
+export * from './auth/RequestCodeView';

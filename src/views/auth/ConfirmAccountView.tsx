@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input";
 import { useMutation } from "@tanstack/react-query";
 import { confirmAccount } from "@/api";
 import { toast } from "react-toastify";
+import { Button } from "@/components";
 
 export const ConfirmAccountView: React.FC = () => {
 
     const [token, setToken] = useState('');
 
-    const { mutate, isPending } = useMutation({
+    const { mutate } = useMutation({
         mutationFn: confirmAccount,
         onSuccess: (data) => {
             toast.success(data.msg)
@@ -27,8 +27,6 @@ export const ConfirmAccountView: React.FC = () => {
         mutate(tokenComplete)
     }
 
-
-
     return (
         <>
             <h1 className="text-5xl font-black text-white">Confirm your account</h1>
@@ -37,7 +35,7 @@ export const ConfirmAccountView: React.FC = () => {
                 <span className=" text-fuchsia-500 font-bold"> by e-mail</span>
             </p>
             <form
-                className="space-y-8 p-10 bg-white mt-10"
+                className="space-y-8 p-10 bg-white mt-10 border border-2 rounded-2xl"
             >
                 <label
                     className="font-normal text-2xl text-center block"
@@ -56,12 +54,7 @@ export const ConfirmAccountView: React.FC = () => {
             </form>
 
             <nav className="mt-10 flex flex-col space-y-4">
-                <Link
-                    to='/auth/new-code'
-                    className="text-center text-gray-300 font-normal"
-                >
-                    Get a new code
-                </Link>
+                <Button title="Get a new code" route="/auth/request-code" />
             </nav>
 
         </>

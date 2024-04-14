@@ -9,3 +9,7 @@ export const createAccount = async (formData: UserRegistrationForm) => {
 export const confirmAccount = async (token: string) => {
     return await makeSafeRequest<string>(() => uptaskApi.post('/auth/confirm-account', { token }))
 }
+
+export const requestCode = async (email: string) => {
+    return await makeSafeRequest<string>(() => uptaskApi.post('/auth/request-code', { email }))
+}

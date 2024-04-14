@@ -7,7 +7,7 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = ({ title, route }) => {
     return (
-        <Link to={route} className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-md">
+        <Link to={route} className="bg-purple-400 text-center hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-md">
             { title }
         </Link>
     )
