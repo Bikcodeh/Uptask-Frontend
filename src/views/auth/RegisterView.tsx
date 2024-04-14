@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import { UserRegistrationForm } from "@/types";
-import { ErrorMessage } from "@/components";
+import { ButtonLoading, ErrorMessage } from "@/components";
 import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { createAccount } from "@/api";
+import { toast } from "react-toastify";
 
 export const RegisterView: React.FC = () => {
 
@@ -9,21 +12,35 @@ export const RegisterView: React.FC = () => {
         name: '',
         email: '',
         password: '',
-        confirm_password: '',
+        password_confirmation: '',
     }
+
 
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<UserRegistrationForm>({ defaultValues: initialValues });
 
     const password = watch('password');
 
-    const handleRegister = (formData: UserRegistrationForm) => { }
+    const handleRegister = (formData: UserRegistrationForm) => {
+        mutate(formData)
+    }
+
+    const { mutate, isPending } = useMutation({
+        mutationFn: createAccount,
+        onSuccess: (data) => {
+            toast.success(data.msg)
+            reset()
+        },
+        onError: (error) => {
+            toast.error(error.message)
+        }
+    })
 
     return (
         <>
-            <h1 className="text-5xl font-black text-white">Crear Cuenta</h1>
+            <h1 className="text-5xl font-black text-white">Create Account</h1>
             <p className="text-2xl font-light text-white mt-5">
-                Llena el formulario para {''}
-                <span className=" text-fuchsia-500 font-bold"> crear tu cuenta</span>
+                Fill the form to {''}
+                <span className=" text-fuchsia-500 font-bold"> create your account</span>
             </p>
 
             <form
@@ -39,13 +56,13 @@ export const RegisterView: React.FC = () => {
                     <input
                         id="email"
                         type="email"
-                        placeholder="Email de Registro"
+                        placeholder="Register Email"
                         className="w-full p-3  border-gray-300 border"
                         {...register("email", {
-                            required: "El Email de registro es obligatorio",
+                            required: "Email is required",
                             pattern: {
                                 value: /\S+@\S+\.\S+/,
-                                message: "E-mail no válido",
+                                message: "E-mail is not valid",
                             },
                         })}
                     />
@@ -57,13 +74,13 @@ export const RegisterView: React.FC = () => {
                 <div className="flex flex-col gap-5">
                     <label
                         className="font-normal text-2xl"
-                    >Nombre</label>
+                    >Name</label>
                     <input
                         type="name"
-                        placeholder="Nombre de Registro"
+                        placeholder="Register name"
                         className="w-full p-3  border-gray-300 border"
                         {...register("name", {
-                            required: "El Nombre de usuario es obligatorio",
+                            required: "Name is required",
                         })}
                     />
                     {errors.name && (
@@ -78,13 +95,13 @@ export const RegisterView: React.FC = () => {
 
                     <input
                         type="password"
-                        placeholder="Password de Registro"
+                        placeholder="Register password"
                         className="w-full p-3  border-gray-300 border"
                         {...register("password", {
-                            required: "El Password es obligatorio",
+                            required: "Password is required",
                             minLength: {
                                 value: 8,
-                                message: 'El Password debe ser mínimo de 8 caracteres'
+                                message: 'Password must have at least 8 characters'
                             }
                         })}
                     />
@@ -96,28 +113,26 @@ export const RegisterView: React.FC = () => {
                 <div className="flex flex-col gap-5">
                     <label
                         className="font-normal text-2xl"
-                    >Repetir Password</label>
+                    >Confirm Password</label>
 
                     <input
                         id="password_confirmation"
                         type="password"
-                        placeholder="Repite Password de Registro"
+                        placeholder="Repeat Register Password"
                         className="w-full p-3  border-gray-300 border"
-                        {...register("confirm_password", {
-                            required: "Repetir Password es obligatorio",
-                            validate: value => value === password || 'Los Passwords no son iguales'
+                        {...register("password_confirmation", {
+                            required: "Confirm password is required",
+                            validate: value => value === password || 'Password does not match'
                         })}
                     />
 
-                    {errors.confirm_password && (
-                        <ErrorMessage>{errors.confirm_password.message}</ErrorMessage>
+                    {errors.password_confirmation && (
+                        <ErrorMessage>{errors.password_confirmation.message}</ErrorMessage>
                     )}
                 </div>
-
-                <input
-                    type="submit"
-                    value='Registrarme'
-                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer"
+                <ButtonLoading
+                    title="Sign Up"
+                    isLoading={isPending}
                 />
             </form>
             <nav className="mt-10 flex flex-col space-y-4">

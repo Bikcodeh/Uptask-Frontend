@@ -52,9 +52,9 @@ export type Auth = {
     name: string;
     email: string;
     password: string;
-    confirm_password: string;
+    password_confirmation: string;
 }
 
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
-export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'confirm_password'>
+export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'password_confirmation'>
 /** Auth */
