@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { ForgotPasswordForm } from "@/types";
 import { ButtonLoading, ErrorMessage } from "@/components";
+import { useMutation } from "@tanstack/react-query";
+import { forgotPassword } from "@/api";
+import { toast } from "react-toastify";
 
 export const ForgotPasswordView: React.FC = () => {
     const initialValues: ForgotPasswordForm = {
@@ -9,7 +12,18 @@ export const ForgotPasswordView: React.FC = () => {
     }
     const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: initialValues });
 
-    const handleForgotPassword = (formData: ForgotPasswordForm) => { }
+    const handleForgotPassword = (formData: ForgotPasswordForm) => { mutate(formData) }
+
+    const {mutate, isPending} = useMutation({
+        mutationFn: forgotPassword,
+        onSuccess: (data) => {
+            toast.success(data.msg)
+            reset()
+        },
+        onError: (error) => {
+            toast.error(error.message)
+        }
+    })
 
 
     return (
@@ -45,7 +59,7 @@ export const ForgotPasswordView: React.FC = () => {
 
                 <ButtonLoading
                     title="Send Instructions"
-                    isLoading
+                    isLoading={isPending}
                 />
             </form>
 
