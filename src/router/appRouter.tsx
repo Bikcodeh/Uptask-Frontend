@@ -9,7 +9,9 @@ import {
     LoginView,
     RegisterView,
     ConfirmAccountView,
-    RequestCodeView
+    RequestCodeView,
+    ForgotPasswordView,
+    NewPasswordView
 } from "@/views";
 
 export function AppRoutes() {
@@ -28,6 +30,8 @@ export function AppRoutes() {
                     <Route path="/auth/register" element={<RegisterView />} />
                     <Route path="/auth/confirm-account" element={<ConfirmAccountView />} />
                     <Route path="/auth/request-code" element={<RequestCodeView />} />
+                    <Route path="/auth/forgot-password" element={<ForgotPasswordView />} />
+                    <Route path="/auth/new-password" element={<NewPasswordView />} />
                 </Route>
             </Routes>
         </BrowserRouter>
