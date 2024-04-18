@@ -17,3 +17,5 @@ export * from './tasks/TaskModalDetails';
 export * from './tasks/EditTaskModal';
 export * from './ButtonLoading';
 export * from './Button';
+export * from './auth/NewPasswordForm';
+export * from './auth/NewPasswordToken';
