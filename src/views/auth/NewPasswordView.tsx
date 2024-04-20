@@ -3,6 +3,7 @@ import { useState } from "react"
 
 export const NewPasswordView: React.FC = () => {
 
+  const [token, setToken] = useState<string>('');
   const [isTokenValid, setIsTokenValid] = useState(false);
   return (
     <>
@@ -11,7 +12,7 @@ export const NewPasswordView: React.FC = () => {
         Enter the code that we sent you {''}
         <span className=" text-fuchsia-500 font-bold"> by e-mail</span>
       </p>
-      { !isTokenValid ? <NewPasswordToken /> : <NewPasswordForm />}
+      {!isTokenValid ? <NewPasswordToken token={token} setToken={setToken} setIsTokenValid={setIsTokenValid} /> : <NewPasswordForm token={token} />}
     </>
   )
 }

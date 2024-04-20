@@ -30,7 +30,11 @@ export const LoginView: React.FC = () => {
 
     return (
         <>
-        <h1 className="text-5xl font-black mb-10 text-white">Login</h1>
+            <h1 className="text-5xl font-black mb-10 text-white">Login</h1>
+            <p className="text-2xl font-light text-white mt-5 mb-5">
+               Start planning your projects {''}
+                <span className=" text-fuchsia-500 font-bold"> loggin into the app</span>
+            </p>
             <form
                 onSubmit={handleSubmit(handleLogin)}
                 className="space-y-8 p-10 bg-white"

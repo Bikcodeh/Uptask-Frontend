@@ -2,18 +2,37 @@ import { NewPasswordFormData } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ButtonLoading, ErrorMessage } from "@/components";
+import { useMutation } from "@tanstack/react-query";
+import { updatePasswordWithToken } from "@/api";
+import { toast } from "react-toastify";
+
+type NewPasswordFormProps = {
+    token: string;
+}
 
 
-export const NewPasswordForm = () => {
+export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({ token }) => {
     const navigate = useNavigate()
     const initialValues: NewPasswordFormData = {
         password: '',
         password_confirmation: '',
     }
+
+    const { mutate, isPending } = useMutation({
+        mutationFn: updatePasswordWithToken,
+        onSuccess: (data) => {
+            toast.success(data.msg);
+            reset();
+            navigate('/auth/login', { replace: true });
+        },
+        onError: (error) => {
+            toast.error(error.message);
+        }
+    })
+
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({ defaultValues: initialValues });
 
-
-    const handleNewPassword = (formData: NewPasswordFormData) => { }
+    const handleNewPassword = (formData: NewPasswordFormData) => mutate({ token, formData })
 
     const password = watch('password');
 
@@ -70,7 +89,7 @@ export const NewPasswordForm = () => {
 
                 <ButtonLoading
                     title="Reset Password"
-                    isLoading
+                    isLoading={isPending}
                 />
             </form>
         </>

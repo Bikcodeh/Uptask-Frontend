@@ -13,7 +13,7 @@ export const AuthLayout = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
+            <ToastContainer  pauseOnFocusLoss={false} pauseOnHover={false} />
         </>
     )
 }
