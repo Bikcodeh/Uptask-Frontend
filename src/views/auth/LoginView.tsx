@@ -12,6 +12,7 @@ export const LoginView: React.FC = () => {
         mutationFn: doLogin,
         onSuccess: (data) => {
             toast.success(data.msg)
+            localStorage.setItem('AUTH_TOKEN', data.data || '')
         },
         onError: (error) => {
             toast.error(error.message)
