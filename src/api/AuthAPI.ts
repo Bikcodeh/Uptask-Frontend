@@ -1,6 +1,6 @@
 import { uptaskApi } from './../lib/axios';
 import { makeSafeRequest } from './../utils/index';
-import { ForgotPasswordForm, NewPasswordFormData, UserLoginForm, UserRegistrationForm } from "@/types";
+import { ForgotPasswordForm, NewPasswordFormData, User, UserLoginForm, UserRegistrationForm } from "@/types";
 
 export const createAccount = async (formData: UserRegistrationForm) => {
     return await makeSafeRequest<string>(() => uptaskApi.post('/auth/create-account', formData))
@@ -28,4 +28,8 @@ export const validateToken = async (token: string) => {
 
 export const updatePasswordWithToken = async ({ token, formData }: { token: string, formData: NewPasswordFormData }) => {
     return await makeSafeRequest<string>(() => uptaskApi.post(`/auth/update-password/${token}`, { ...formData }))
+}
+
+export const getUser = async () => {
+    return await makeSafeRequest<User>(() => uptaskApi.get('/auth/user'))
 }

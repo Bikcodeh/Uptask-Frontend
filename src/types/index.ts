@@ -55,6 +55,10 @@ export type Auth = {
     password_confirmation: string;
 }
 
+export type User = Pick<Auth, 'email' | 'name'> & {
+    userId: string;
+}
+
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>
 export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'password_confirmation'>
 export type RequestConfirmationCodeForm = Pick<Auth, 'email'>
